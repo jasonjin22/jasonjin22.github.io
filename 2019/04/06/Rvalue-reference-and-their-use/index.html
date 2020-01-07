@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="这是Laurent Kneip教授的CS133的第7讲，上课的时候听的迷迷糊糊的，但是后来写作业的时候觉得这些内容非常重要但是不容易理解，所以写一点总结。 motivation我们想要让一个class来代替programmer来管理动态分配的memory，在constructor里面分配资源，在deconstructor里面de-allocate. Smart pointer: 123456789">
+<meta name="description" content="这是Laurent Kneip教授的CS133的第7讲，上课的时候听的迷迷糊糊的，但是后来写作业的时候觉得这些内容非常重要但是不容易理解，所以写一点总结。 motivation 我们想要让一个class来代替programmer来管理动态分配的memory，在constructor里面分配资源，在deconstructor里面de-allocate. Smart pointer: 12345678">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Rvalue reference and their use">
 <meta property="og:url" content="http://yoursite.com/2019/04/06/Rvalue-reference-and-their-use/index.html">
-<meta property="og:site_name" content="I am orres">
-<meta property="og:description" content="这是Laurent Kneip教授的CS133的第7讲，上课的时候听的迷迷糊糊的，但是后来写作业的时候觉得这些内容非常重要但是不容易理解，所以写一点总结。 motivation我们想要让一个class来代替programmer来管理动态分配的memory，在constructor里面分配资源，在deconstructor里面de-allocate. Smart pointer: 123456789">
+<meta property="og:site_name" content="i am orres">
+<meta property="og:description" content="这是Laurent Kneip教授的CS133的第7讲，上课的时候听的迷迷糊糊的，但是后来写作业的时候觉得这些内容非常重要但是不容易理解，所以写一点总结。 motivation 我们想要让一个class来代替programmer来管理动态分配的memory，在constructor里面分配资源，在deconstructor里面de-allocate. Smart pointer: 12345678">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-05T16:54:28.000Z">
+<meta property="og:updated_time" content="2019-09-30T13:03:36.912Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Rvalue reference and their use">
-<meta name="twitter:description" content="这是Laurent Kneip教授的CS133的第7讲，上课的时候听的迷迷糊糊的，但是后来写作业的时候觉得这些内容非常重要但是不容易理解，所以写一点总结。 motivation我们想要让一个class来代替programmer来管理动态分配的memory，在constructor里面分配资源，在deconstructor里面de-allocate. Smart pointer: 123456789">
+<meta name="twitter:description" content="这是Laurent Kneip教授的CS133的第7讲，上课的时候听的迷迷糊糊的，但是后来写作业的时候觉得这些内容非常重要但是不容易理解，所以写一点总结。 motivation 我们想要让一个class来代替programmer来管理动态分配的memory，在constructor里面分配资源，在deconstructor里面de-allocate. Smart pointer: 12345678">
 
 
 
@@ -125,7 +125,7 @@
 
 
 
-  <title>Rvalue reference and their use | I am orres</title>
+  <title>Rvalue reference and their use | i am orres</title>
   
 
 
@@ -155,7 +155,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">I am orres</span>
+        <span class="site-title">i am orres</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -261,7 +261,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="I am orres">
+      <meta itemprop="name" content="i am orres">
     </span>
 
     
@@ -304,8 +304,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习/" itemprop="url" rel="index">
-                    <span itemprop="name">学习</span>
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
                   </a>
                 </span>
 
@@ -342,16 +342,19 @@
 
       
         <p>这是Laurent Kneip教授的CS133的第7讲，上课的时候听的迷迷糊糊的，但是后来写作业的时候觉得这些内容非常重要但是不容易理解，所以写一点总结。</p>
-<h4 id="motivation"><a href="#motivation" class="headerlink" title="motivation"></a>motivation</h4><p>我们想要让一个class来代替programmer来管理动态分配的memory，在constructor里面分配资源，在deconstructor里面de-allocate.</p>
+<h4 id="motivation">motivation</h4>
+<p>我们想要让一个class来代替programmer来管理动态分配的memory，在constructor里面分配资源，在deconstructor里面de-allocate.</p>
 <p>Smart pointer:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class">  <span class="title">class</span> <span class="title">Auto_ptr1</span> &#123;</span></span><br><span class="line">    T* m_ptr;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    Auto_ptr1(T* ptr=<span class="literal">nullptr</span>) : m_ptr(ptr) &#123;&#125;</span><br><span class="line">    ~Auto_ptr1() &#123;<span class="keyword">delete</span> m_ptr;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// overload deference and operator -&gt;</span></span><br><span class="line">    <span class="comment">// let us use Auto_ptr like m_ptr</span></span><br><span class="line">    T&amp; <span class="keyword">operator</span>*() <span class="keyword">const</span> &#123;<span class="keyword">return</span> *m_ptr;&#125;</span><br><span class="line">    T* <span class="keyword">operator</span>-&gt;() <span class="keyword">const</span> &#123;<span class="keyword">return</span> m_ptr;&#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 <p>现在我们就可以愉快地用Smart pointer了，比如：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  Auto_ptr&lt;Resource&gt; ptr(<span class="keyword">new</span> Resource);</span><br><span class="line">  <span class="keyword">int</span> x = somevalue;</span><br><span class="line">  <span class="keyword">if</span> (x == <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span>; <span class="comment">// 不必担心内存泄漏</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    ptr-&gt;sayHi();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="Auto-pointer-flaw"><a href="#Auto-pointer-flaw" class="headerlink" title="Auto-pointer flaw"></a>Auto-pointer flaw</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  Auto_ptr1&lt;Resource&gt; res1(<span class="keyword">new</span> Resource);</span><br><span class="line">  Auto_ptr1&lt;Resource&gt; res2(res1); <span class="comment">// both res1 and res2 are pointing to</span></span><br><span class="line">  																<span class="comment">// at the same resource</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">or</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  Auto_ptr1&lt;Resource&gt; res1(<span class="keyword">new</span> Resource);</span><br><span class="line">  Auto_ptr1&lt;Resource&gt; res2;</span><br><span class="line">  res2 = res1;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Resource acquired</span></span><br><span class="line"><span class="comment">// Resource destroyed</span></span><br><span class="line"><span class="comment">// Segmentation fault</span></span><br></pre></td></tr></table></figure>
+<h4 id="auto-pointer-flaw">Auto-pointer flaw</h4>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  Auto_ptr1&lt;Resource&gt; res1(<span class="keyword">new</span> Resource);</span><br><span class="line">  Auto_ptr1&lt;Resource&gt; res2(res1); <span class="comment">// both res1 and res2 are pointing to</span></span><br><span class="line">  																<span class="comment">// at the same resource</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">or</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  Auto_ptr1&lt;Resource&gt; res1(<span class="keyword">new</span> Resource);</span><br><span class="line">  Auto_ptr1&lt;Resource&gt; res2;</span><br><span class="line">  res2 = res1;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Resource acquired</span></span><br><span class="line"><span class="comment">// Resource destroyed</span></span><br><span class="line"><span class="comment">// Segmentation fault</span></span><br></pre></td></tr></table></figure>
 <p>similar problem is caused by this:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">passbyvalue</span><span class="params">(Auto_ptr1&lt;Resource&gt; res)</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  Auto_ptr1&lt;Resource&gt; res1(<span class="keyword">new</span> Resource);</span><br><span class="line"><span class="comment">//pass by value will make a shallow copy of res1 and then destroy this copy upon finishing the function body</span></span><br><span class="line">  passbyvalue(res1);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// crash</span></span><br></pre></td></tr></table></figure>
-<h4 id="solutions-to-the-Auto-ptr-flaw"><a href="#solutions-to-the-Auto-ptr-flaw" class="headerlink" title="solutions to the Auto_ptr flaw"></a>solutions to the Auto_ptr flaw</h4><ul>
-<li><p>solution 1: prevent the copy constructor and assignment operator to be “available”</p>
+<h4 id="solutions-to-the-auto_ptr-flaw">solutions to the Auto_ptr flaw</h4>
+<ul>
+<li><p>solution 1: prevent the copy constructor and assignment operator to be &quot;available&quot;</p>
 <ul>
 <li>method 1: explicitly declare copy constructor and make them private</li>
 </ul>
@@ -363,67 +366,66 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class">  <span class="title">class</span> <span class="title">Auto_ptr1</span> &#123;</span></span><br><span class="line">    T* m_ptr;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    Auto_ptr1(T* ptr=<span class="literal">nullptr</span>) : m_ptr(ptr) &#123;&#125;</span><br><span class="line">    ~Auto_ptr1() &#123;<span class="keyword">delete</span> m_ptr;&#125;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    Auto_ptr(<span class="keyword">const</span> Auto_ptr1 &amp;) = <span class="keyword">delete</span>;</span><br><span class="line">    Auto_ptr&amp; <span class="keyword">operator</span>= (<span class="keyword">const</span> Auto_ptr1 &amp;) = <span class="keyword">delete</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 <p>pass by value is no longer available -&gt; we can just pass reference</p>
 <p>however, we can no longer do this:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">??? generateResource() &#123;</span><br><span class="line">  Resource *r = <span class="keyword">new</span> Resource;</span><br><span class="line">  <span class="keyword">return</span> Auto_ptr1(r);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// can't return by reference because object will be destroyed</span></span><br><span class="line"><span class="comment">// can't return by value because copy-constructor is disabled</span></span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">??? generateResource() &#123;</span><br><span class="line">  Resource *r = <span class="keyword">new</span> Resource;</span><br><span class="line">  <span class="keyword">return</span> Auto_ptr1(r);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// can't return by reference because object will be destroyed</span></span><br><span class="line"><span class="comment">// can't return by value because copy-constructor is disabled</span></span><br></pre></td></tr></table></figure></li>
 </ul>
-<h4 id="move-semantics"><a href="#move-semantics" class="headerlink" title="move semantics"></a>move semantics</h4><p>我们不想copy value, just move ownership</p>
+<h4 id="move-semantics">move semantics</h4>
+<p>我们不想copy value, just move ownership</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class">  <span class="title">class</span> <span class="title">Auto_ptr2</span> &#123;</span></span><br><span class="line">    T* m_ptr;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    Auto_ptr2(T* ptr=<span class="literal">nullptr</span>) : m_ptr(ptr) &#123;&#125;</span><br><span class="line">    ~Auto_ptr2() &#123;<span class="keyword">delete</span> m_ptr;&#125;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    T&amp; <span class="keyword">operator</span>*() <span class="keyword">const</span> &#123;<span class="keyword">return</span> *m_ptr;&#125;</span><br><span class="line">    T* <span class="keyword">operator</span>-&gt;() <span class="keyword">const</span> &#123;<span class="keyword">return</span> m_ptr;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isNull</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123;<span class="keyword">return</span> m_ptr == <span class="literal">nullptr</span>;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// something new here</span></span><br><span class="line">    <span class="comment">// copy constructor with move semantics</span></span><br><span class="line">    Auto_ptr2(Auto_ptr2 &amp;a) &#123; <span class="comment">// no longer const</span></span><br><span class="line">      m_ptr = a.ptr;</span><br><span class="line">      a.ptr = <span class="literal">nullptr</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    Auto_ptr2&amp; <span class="keyword">operator</span>= (Auto_ptr2 &amp;a) &#123;</span><br><span class="line">      <span class="keyword">if</span> (&amp;a == <span class="keyword">this</span>) <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">      <span class="keyword">delete</span> m_ptr;</span><br><span class="line">      m_ptr = a.m_ptr;</span><br><span class="line">      a.m_ptr = <span class="literal">nullptr</span>;</span><br><span class="line">      <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>std::auto_ptr is implemented exactly like this in original C++98 standard</li>
 <li>problem occurs if pass by value</li>
 <li>removed since C++17</li>
 </ul>
-<h4 id="Lvalues-and-Rvalues"><a href="#Lvalues-and-Rvalues" class="headerlink" title="Lvalues and Rvalues"></a>Lvalues and Rvalues</h4><p>general rule: if you can take its address, it’s an lvalue, else, it’s an rvalue</p>
+<h4 id="lvalues-and-rvalues">Lvalues and Rvalues</h4>
+<p>general rule: if you can take its address, it's an lvalue, else, it's an rvalue</p>
 <p>some examples:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T1, <span class="keyword">typename</span> T2&gt;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sizeDiff</span><span class="params">(<span class="keyword">const</span> T1 &amp;c1, <span class="keyword">const</span> T2 &amp;c2)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> c1.size() - c2.size();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>lvalue: sizeDiff, c1, c2</p>
 <p>rvalue: return value</p>
 <hr>
-
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *px;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">unordered_set</span>&lt;<span class="keyword">int</span>&gt; s;</span><br><span class="line">...</span><br><span class="line">*px = sizeDiff(v, s);</span><br></pre></td></tr></table></figure>
 <p>lvalue: px, v, s</p>
 <p>rvalue: sizeDiff(v, s)</p>
 <hr>
-
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="function">ifstream <span class="title">myinput</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">string</span>(<span class="string">"something"</span>))</span></span>;</span><br></pre></td></tr></table></figure>
 <p>anonymous objects are rvalues</p>
 <hr>
-
 <ul>
-<li>Rvalues die at the end of an expression<ul>
-<li>they can’t be assigned to</li>
-</ul>
-</li>
+<li>Rvalues die at the end of an expression
+<ul>
+<li>they can't be assigned to</li>
+</ul></li>
 </ul>
 <p>but there is a special case:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printSomething</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> &amp;str)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// the parameter is an lvalue(object with name and space)</span></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; str &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  printSomething(<span class="built_in">std</span>::<span class="built_in">string</span>(<span class="string">"hello"</span>)); <span class="comment">// we passed in an rvalue!!!</span></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>local const reference can be used to prolong the lifetime of temporary value and refers to it until the end of the containing scope(does not incur the cost of a copy-construction)</p>
-<h4 id="Rvalue-references"><a href="#Rvalue-references" class="headerlink" title="Rvalue references"></a>Rvalue references</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">int</span> &amp;lref = x; <span class="comment">// lvalue reference initialized with lvalue x</span></span><br><span class="line"><span class="keyword">int</span> &amp;&amp;rref = <span class="number">5</span>; <span class="comment">// rvalue reference initialized with rvalue 5</span></span><br></pre></td></tr></table></figure>
+<h4 id="rvalue-references">Rvalue references</h4>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">int</span> &amp;lref = x; <span class="comment">// lvalue reference initialized with lvalue x</span></span><br><span class="line"><span class="keyword">int</span> &amp;&amp;rref = <span class="number">5</span>; <span class="comment">// rvalue reference initialized with rvalue 5</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>rvalue reference allows us to<ul>
+<li>rvalue reference allows us to
+<ul>
 <li>extend the lifespan of the (rvalue) object by the lifespan of the rvalue reference</li>
 <li>modify the rvalue</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h4 id="move-construction-and-move-assignment"><a href="#move-construction-and-move-assignment" class="headerlink" title="move construction and move assignment"></a>move construction and move assignment</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class">  <span class="title">class</span> <span class="title">Auto_ptr3</span> &#123;</span></span><br><span class="line">    T* m_ptr;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    Auto_ptr3(T* ptr=<span class="literal">nullptr</span>) : m_ptr(ptr) &#123;&#125;</span><br><span class="line">    ~Auto_ptr3() &#123;<span class="keyword">delete</span> m_ptr;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// copy constructor: do deep copy of a.m_ptr to m_ptr</span></span><br><span class="line">    Auto_ptr3(<span class="keyword">const</span> Auto_ptr3 &amp;a) &#123;</span><br><span class="line">      m_ptr = <span class="keyword">new</span> T;</span><br><span class="line">      *m_ptr = *a.m_ptr;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// copy assignment: do deep copy of a.m_ptr to m_ptr</span></span><br><span class="line">    Auto_ptr3&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> Auto_ptr3&amp; a) &#123;</span><br><span class="line">      <span class="keyword">if</span> (&amp;a == <span class="keyword">this</span>) <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">      </span><br><span class="line">      <span class="keyword">delete</span> m_ptr;</span><br><span class="line">      m_ptr = <span class="keyword">new</span> T;</span><br><span class="line">      *m_ptr = *a.m_ptr;</span><br><span class="line">      <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    T&amp; <span class="keyword">operator</span>*() <span class="keyword">const</span> &#123;<span class="keyword">return</span> *m_ptr;&#125;</span><br><span class="line">    T* <span class="keyword">operator</span>-&gt;() <span class="keyword">const</span> &#123;<span class="keyword">return</span> m_ptr;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isNull</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123;<span class="keyword">return</span> m_ptr == <span class="literal">nullptr</span>;&#125;</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="move-construction-and-move-assignment">move construction and move assignment</h4>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class">  <span class="title">class</span> <span class="title">Auto_ptr3</span> &#123;</span></span><br><span class="line">    T* m_ptr;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    Auto_ptr3(T* ptr=<span class="literal">nullptr</span>) : m_ptr(ptr) &#123;&#125;</span><br><span class="line">    ~Auto_ptr3() &#123;<span class="keyword">delete</span> m_ptr;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// copy constructor: do deep copy of a.m_ptr to m_ptr</span></span><br><span class="line">    Auto_ptr3(<span class="keyword">const</span> Auto_ptr3 &amp;a) &#123;</span><br><span class="line">      m_ptr = <span class="keyword">new</span> T;</span><br><span class="line">      *m_ptr = *a.m_ptr;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// copy assignment: do deep copy of a.m_ptr to m_ptr</span></span><br><span class="line">    Auto_ptr3&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> Auto_ptr3&amp; a) &#123;</span><br><span class="line">      <span class="keyword">if</span> (&amp;a == <span class="keyword">this</span>) <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">      </span><br><span class="line">      <span class="keyword">delete</span> m_ptr;</span><br><span class="line">      m_ptr = <span class="keyword">new</span> T;</span><br><span class="line">      *m_ptr = *a.m_ptr;</span><br><span class="line">      <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    T&amp; <span class="keyword">operator</span>*() <span class="keyword">const</span> &#123;<span class="keyword">return</span> *m_ptr;&#125;</span><br><span class="line">    T* <span class="keyword">operator</span>-&gt;() <span class="keyword">const</span> &#123;<span class="keyword">return</span> m_ptr;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isNull</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123;<span class="keyword">return</span> m_ptr == <span class="literal">nullptr</span>;&#125;</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
 <p>the usage:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Resource</span> &#123;</span></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">  Resource() &#123;<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"resource acquired\n"</span>;&#125;</span><br><span class="line">  ~Resource() &#123;<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"resource destroyed\n"</span>;&#125;</span><br><span class="line">&#125;;</span><br><span class="line">Auto_ptr3&lt;Resource&gt; generateResource() &#123;</span><br><span class="line">  Auto_ptr3&lt;Resource&gt; res(<span class="keyword">new</span> Resource);</span><br><span class="line">  <span class="keyword">return</span> res; <span class="comment">// return value invokes copy constructor</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  Auto_ptr3&lt;Resource&gt; mainres; <span class="comment">// no output until now</span></span><br><span class="line">  mainres = generateResource(); <span class="comment">// generateResource() print 1, copy assignment print 1</span></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>output:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">resource acquired</span><br><span class="line">resource acquired</span><br><span class="line">resource destroyed</span><br><span class="line">resource destroyed</span><br></pre></td></tr></table></figure>
 <p>2 allocations to create an object, inefficient but very safe</p>
 <hr>
-
 <ul>
-<li>move construction/assignment<ul>
+<li>move construction/assignment
+<ul>
 <li>role: move ownership from one obj to another</li>
 <li>use instead of copying to gain efficiency</li>
-<li>similar to regular copy constructor/assignment oprator<ul>
+<li>similar to regular copy constructor/assignment oprator
+<ul>
 <li><strong>take non-const rvalue reference instead of const lvalue reference</strong></li>
-</ul>
-</li>
-</ul>
-</li>
+</ul></li>
+</ul></li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class">  <span class="title">class</span> <span class="title">Auto_ptr4</span> &#123;</span></span><br><span class="line">    T* m_ptr;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    Auto_ptr4(T* ptr=<span class="literal">nullptr</span>) : m_ptr(ptr) &#123;&#125;</span><br><span class="line">    ~Auto_ptr4() &#123;<span class="keyword">delete</span> m_ptr;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// copy constructor: do deep copy of a.m_ptr to m_ptr</span></span><br><span class="line">    Auto_ptr3(<span class="keyword">const</span> Auto_ptr3 &amp;a) &#123;</span><br><span class="line">      m_ptr = <span class="keyword">new</span> T;</span><br><span class="line">      *m_ptr = *a.m_ptr;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// copy assignment: do deep copy of a.m_ptr to m_ptr</span></span><br><span class="line">    Auto_ptr3&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> Auto_ptr3&amp; a) &#123;</span><br><span class="line">      <span class="keyword">if</span> (&amp;a == <span class="keyword">this</span>) <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">      <span class="keyword">delete</span> m_ptr;</span><br><span class="line">      m_ptr = <span class="keyword">new</span> T;</span><br><span class="line">      *m_ptr = *a.m_ptr;</span><br><span class="line">      <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// move constructor: transfer ownership of a.m_ptr to m_ptr</span></span><br><span class="line">    Auto_ptr4(Auto_ptr&amp;&amp; a) : m_ptr(a.m_ptr) &#123;</span><br><span class="line">      a.m_ptr = <span class="literal">nullptr</span>;</span><br><span class="line">      <span class="comment">// remove ownership</span></span><br><span class="line">      <span class="comment">// prevent a from destroying resource</span></span><br><span class="line">      <span class="comment">// prevent a from causing dangling pointers</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// move assignment operator: transfer ownership of a.m_ptr to m_ptr</span></span><br><span class="line">    Auto_ptr4&amp; <span class="keyword">operator</span>=(Auto_ptr4&amp;&amp; a) &#123;</span><br><span class="line">      <span class="comment">// self-assignment detection</span></span><br><span class="line">      <span class="keyword">if</span> (&amp;a == <span class="keyword">this</span>) <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">      </span><br><span class="line">      <span class="keyword">delete</span> m_ptr;</span><br><span class="line">      m_ptr = a.m_ptr;</span><br><span class="line">      a.m_ptr = <span class="literal">nullptr</span>; <span class="comment">// remove ownership, prevent a from destroying resource, prevent a from causing dangling pointers</span></span><br><span class="line">      <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">      </span><br><span class="line">      </span><br><span class="line">    T&amp; <span class="keyword">operator</span>*() <span class="keyword">const</span> &#123;<span class="keyword">return</span> *m_ptr;&#125;</span><br><span class="line">    T* <span class="keyword">operator</span>-&gt;() <span class="keyword">const</span> &#123;<span class="keyword">return</span> m_ptr;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isNull</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123;<span class="keyword">return</span> m_ptr == <span class="literal">nullptr</span>;&#125;</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
 <p>and now we run the program again:</p>
@@ -431,13 +433,14 @@
 <p>output:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">resource acquired</span><br><span class="line">resource destroyed</span><br></pre></td></tr></table></figure>
 <ul>
-<li>key insights<ul>
+<li>key insights
+<ul>
 <li>if an lvalue is used, like: a = b(we should make a deep copy and not alter b)</li>
 <li>if an rvalue is used, like: a = b + c(rvalue is about to be destroyed, it is reasonale to steal the ownership and avoid copying)</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h4 id="std-move"><a href="#std-move" class="headerlink" title="std::move"></a>std::move</h4><p><strong>extension of move semantics to lvalues!</strong></p>
+<h4 id="stdmove">std::move</h4>
+<p><strong>extension of move semantics to lvalues!</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">swap</span>(<span class="title">T</span>&amp; <span class="title">a</span>, <span class="title">T</span>&amp; <span class="title">b</span>) &#123;</span></span><br><span class="line">  T tmp&#123;a&#125;; <span class="comment">// invokes copy constructor</span></span><br><span class="line">  a = b; <span class="comment">// invokes copy assignment</span></span><br><span class="line">  b = tmp; <span class="comment">// invokes copy assignment</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>however doing 3 copies is unnecessary, we can do 3 moves instead</p>
 <p>solution: <strong>cast the lvalues to rvalues</strong> with std::move()</p>
@@ -448,10 +451,8 @@
 <p>output:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">copying str</span><br><span class="line">str is:Knockand vec[<span class="number">0</span>] is:Knock</span><br><span class="line">move str</span><br><span class="line">str is:vec[<span class="number">0</span>] is:Knockvec[<span class="number">1</span>] is:Knock</span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>objects that are being stolen from need to be left in a defined “null state”</p>
-</li>
-<li><p>they are not a temporary after all, and can be used again later</p>
-</li>
+<li><p>objects that are being stolen from need to be left in a defined &quot;null state&quot;</p></li>
+<li><p>they are not a temporary after all, and can be used again later</p></li>
 </ul>
 
       
@@ -486,6 +487,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/30/Markov-Chains/" rel="prev" title="Markov Chains">
+                Markov Chains <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -564,7 +569,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -575,7 +580,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -626,7 +631,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#motivation"><span class="nav-number">1.</span> <span class="nav-text">motivation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Auto-pointer-flaw"><span class="nav-number">2.</span> <span class="nav-text">Auto-pointer flaw</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#solutions-to-the-Auto-ptr-flaw"><span class="nav-number">3.</span> <span class="nav-text">solutions to the Auto_ptr flaw</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#move-semantics"><span class="nav-number">4.</span> <span class="nav-text">move semantics</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lvalues-and-Rvalues"><span class="nav-number">5.</span> <span class="nav-text">Lvalues and Rvalues</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Rvalue-references"><span class="nav-number">6.</span> <span class="nav-text">Rvalue references</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#move-construction-and-move-assignment"><span class="nav-number">7.</span> <span class="nav-text">move construction and move assignment</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#std-move"><span class="nav-number">8.</span> <span class="nav-text">std::move</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#motivation"><span class="nav-number">1.</span> <span class="nav-text">motivation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#auto-pointer-flaw"><span class="nav-number">2.</span> <span class="nav-text">Auto-pointer flaw</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#solutions-to-the-auto_ptr-flaw"><span class="nav-number">3.</span> <span class="nav-text">solutions to the Auto_ptr flaw</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#move-semantics"><span class="nav-number">4.</span> <span class="nav-text">move semantics</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lvalues-and-rvalues"><span class="nav-number">5.</span> <span class="nav-text">Lvalues and Rvalues</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rvalue-references"><span class="nav-number">6.</span> <span class="nav-text">Rvalue references</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#move-construction-and-move-assignment"><span class="nav-number">7.</span> <span class="nav-text">move construction and move assignment</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#stdmove"><span class="nav-number">8.</span> <span class="nav-text">std::move</span></a></li></ol></div>
             
 
           </div>
@@ -646,7 +651,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -833,6 +838,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 
