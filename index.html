@@ -346,7 +346,7 @@
 <p>问题：太阳已经照常升起N天了，明天太阳照常升起的概率是多少？</p>
 <p>$X: $ 事件that太阳已经照常升起了N天</p>
 <p>$Y: $ 事件that太阳明天会照常升起</p>
-<p><span class="math inline">\(\theta :\)</span> 对于任意一天而言，太阳照常升起的概率，在区间<span class="math inline">\([0, 1]\)</span>上， <span class="math inline">\(P(\theta) = 1\)</span></p>
+<p><span class="math inline">\(\theta :\)</span> 对于任意一天而言，太阳照常升起的概率，在区间<span class="math inline">\([0, 1]\)</span>上， <span class="math inline">\(P(\theta) = 1\)</span>(均匀分布的概率密度函数)</p>
 <p><strong>step 1: 贝叶斯估计 </strong> <span class="math display">\[
 \begin{align}
 P(\theta|X) &amp;= \dfrac{P(X|\theta)P(\theta)}{\int_0^1 P(X|\theta)P(\theta)d\theta} \\ &amp;= \dfrac{P(X|\theta)}{\int_0^1 P(X|\theta)d\theta} \\ &amp;= \dfrac{\theta^N}{\int_0^1 \theta^N d\theta} \\ &amp;= \dfrac{\theta^N}{\frac{1}{N+1}\theta^{N+1}|_0^1} \\ &amp;= \dfrac{\theta^N}{\frac{1}{N+1}} \\ &amp;= (N+1)\theta^N
