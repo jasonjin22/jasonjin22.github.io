@@ -80,12 +80,12 @@
 
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="i am orres">
+<meta property="og:title" content="orres&#39; notes">
 <meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="i am orres">
+<meta property="og:site_name" content="orres&#39; notes">
 <meta property="og:locale" content="default">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="i am orres">
+<meta name="twitter:title" content="orres&#39; notes">
 
 
 
@@ -121,7 +121,7 @@
 
 
 
-  <title>i am orres</title>
+  <title>orres' notes</title>
   
 
 
@@ -152,7 +152,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">i am orres</span>
+        <span class="site-title">orres' notes</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -249,7 +249,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/30/Markov-Chains/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/10/明天太阳照常升起的概率/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jiachun Jin">
@@ -258,7 +258,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="i am orres">
+      <meta itemprop="name" content="orres' notes">
     </span>
 
     
@@ -268,7 +268,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/30/Markov-Chains/" itemprop="url">Markov Chains</a></h1>
+                <a class="post-title-link" href="/2020/01/10/明天太阳照常升起的概率/" itemprop="url">明天太阳照常升起的概率</a></h1>
         
 
         <div class="post-meta">
@@ -280,8 +280,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-30T21:02:07+08:00">
-                2019-09-30
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-10T18:26:31+08:00">
+                2020-01-10
               </time>
             
 
@@ -303,8 +303,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/stochastic-process/" itemprop="url" rel="index">
-                    <span itemprop="name">stochastic process</span>
+                  <a href="/categories/PRML/" itemprop="url" rel="index">
+                    <span itemprop="name">PRML</span>
                   </a>
                 </span>
 
@@ -342,17 +342,20 @@
       
         
           
-            <p>This is a review of chapter 4 of Introduciton to Probability models(<span class="math inline">\(11^{th}\)</span> edition), here I will focus on some important examples and concepts.</p>
-<h4 id="chapman-kolmogorov-equations">Chapman-Kolmogorov Equations</h4>
-<ul>
-<li><p><span class="math inline">\(P_{i,j}^{n+m} = \sum\limits _{k=0}^{\infty}P_{ik}^{n}P_{kj}^{m}, n \ge 0, i, j, \ge 0\)</span></p></li>
-<li>Example 4.11 Suppose that balls are successively distributed among 8 urns, with each ball being equally likely to be put in any of these urns. What is the probability that there will be exactly 3 nonempty urns after 9 balls have been distributed?
-<ul>
-<li>Let <span class="math inline">\(X_n\)</span> to denote # of filled urns after n balls are dropped</li>
-<li><span class="math inline">\(X_n = \{0, 1, 2, ..., 8\}\)</span></li>
-<li>we want <span class="math inline">\(P_{0,3}^9 = P_{1,3}^8\)</span>, where <span class="math inline">\(X_n = \{1, 2, 3, 4\}\)</span></li>
-</ul></li>
-</ul>
+            <p>结合PRML和<a href="https://space.bilibili.com/97068901?spm_id_from=333.788.b_765f7570696e666f.2" target="_blank" rel="noopener"><strong>shuhuai008</strong></a>大哥的讲解重新理解拉普拉斯太阳照常升起的问题</p>
+<p>问题：太阳已经照常升起N天了，明天太阳照常升起的概率是多少？</p>
+<p>$X: $ 事件that太阳已经照常升起了N天</p>
+<p>$Y: $ 事件that太阳明天会照常升起</p>
+<p><span class="math inline">\(\theta :\)</span> 对于任意一天而言，太阳照常升起的概率，在区间<span class="math inline">\([0, 1]\)</span>上， <span class="math inline">\(P(\theta) = 1\)</span></p>
+<p><strong>step 1: 贝叶斯估计 </strong> <span class="math display">\[
+\begin{align}
+P(\theta|X) &amp;= \dfrac{P(X|\theta)P(\theta)}{\int_0^1 P(X|\theta)P(\theta)d\theta} \\ &amp;= \dfrac{P(X|\theta)}{\int_0^1 P(X|\theta)d\theta} \\ &amp;= \dfrac{\theta^N}{\int_0^1 \theta^N d\theta} \\ &amp;= \dfrac{\theta^N}{\frac{1}{N+1}\theta^{N+1}|_0^1} \\ &amp;= \dfrac{\theta^N}{\frac{1}{N+1}} \\ &amp;= (N+1)\theta^N
+\end{align}
+\]</span> <strong>step 2: 贝叶斯预测</strong> <span class="math display">\[
+\begin{align}
+P(Y|X) &amp;= \int_0^1 P(Y|X,\theta) d\theta \\ &amp;= \int_0^1 P(Y|\theta) P(\theta|X) d\theta \\ &amp;= \int_0^1 \theta (N+1)\theta^N d\theta \\ &amp;= (N+1)\int_0^1 \theta^{N+1} d\theta \\ &amp;= \dfrac{N+1}{N+2}
+\end{align}
+\]</span></p>
 
           
         
@@ -410,7 +413,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="i am orres">
+      <meta itemprop="name" content="orres' notes">
     </span>
 
     
@@ -664,7 +667,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="i am orres">
+      <meta itemprop="name" content="orres' notes">
     </span>
 
     
@@ -841,7 +844,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="i am orres">
+      <meta itemprop="name" content="orres' notes">
     </span>
 
     
