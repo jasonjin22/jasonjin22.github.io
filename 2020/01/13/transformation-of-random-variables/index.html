@@ -79,13 +79,17 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="orres&#39; notes">
-<meta property="og:url" content="http://yoursite.com/categories/C/index.html">
+<meta name="description" content="The goal is to find the distribution of the transformed random variable or joint distribution of the random vector. Theorem 8.1.1 (Change of variables in one dimension). Let X be a continuous r.v. wit">
+<meta property="og:type" content="article">
+<meta property="og:title" content="transformation of random variables">
+<meta property="og:url" content="http://yoursite.com/2020/01/13/transformation-of-random-variables/index.html">
 <meta property="og:site_name" content="orres&#39; notes">
+<meta property="og:description" content="The goal is to find the distribution of the transformed random variable or joint distribution of the random vector. Theorem 8.1.1 (Change of variables in one dimension). Let X be a continuous r.v. wit">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-01-13T07:12:17.740Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="orres&#39; notes">
+<meta name="twitter:title" content="transformation of random variables">
+<meta name="twitter:description" content="The goal is to find the distribution of the transformed random variable or joint distribution of the random vector. Theorem 8.1.1 (Change of variables in one dimension). Let X be a continuous r.v. wit">
 
 
 
@@ -115,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/C/">
+  <link rel="canonical" href="http://yoursite.com/2020/01/13/transformation-of-random-variables/">
 
 
 
 
 
-  <title>Category: C++ | orres' notes</title>
+  <title>transformation of random variables | orres' notes</title>
   
 
 
@@ -140,7 +144,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -234,53 +238,194 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block category">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>C++<small>Category</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/13/transformation-of-random-variables/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jiachun Jin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="orres' notes">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/04/06/Rvalue-reference-and-their-use/" itemprop="url">
-              
-                <span itemprop="name">Rvalue reference and their use</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">transformation of random variables</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-06T00:52:30+08:00" content="2019-04-06">
-          04-06
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-13T11:06:06+08:00">
+                2020-01-13
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/PRML/" itemprop="url" rel="index">
+                    <span itemprop="name">PRML</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>The goal is to find the distribution of the transformed random variable or joint distribution</p>
+<p>of the random vector.</p>
+<p><strong>Theorem 8.1.1 </strong>(Change of variables in one dimension). Let X be a continuous r.v. with PDF <span class="math inline">\(f_X\)</span>, and let Y = g(X), where g is differentiable and strictly increasing (or strictly decreasing). Then the PDF of Y is given by: <span class="math display">\[
+f_Y(y) = f_X(x)\left| \dfrac{dx}{dy} \right|\\
+\]</span> proof: <span class="math display">\[
+\begin{align}
+F_Y(y) &amp;= P(Y ≤ y)\\
+&amp;= P(g(X) ≤ y) \\
+&amp;= P(X ≤ g^{-1}(y)) \\
+&amp;= F_X(g^{-1}(y)) \\
+&amp;= F_X(x) &amp;&amp; (y = g(x)) \\
+\end{align}
+\]</span> So we can have $ f_Y(y) =  =  =  = f_X(x)|  |$</p>
+<p><strong>Theorem 8.1.5</strong> (Change of variables). Let X = (X1, . . . ,Xn) be a continuous random vector with joint PDF X, and let Y = g(X) where g is an invertible function from <span class="math inline">\(R^n\)</span> to <span class="math inline">\(R^n\)</span>. (The domain of g does not actually have to be all of <span class="math inline">\(R^n,\)</span> but it does need to be large enough to contain the support of X, else g(X) could be undefined!) <span class="math display">\[
+\begin{align}
+f_Y(y) = f_X(x)\left|\dfrac{\partial x}{\partial y}\right|
+\end{align}
+\]</span> The <span class="math inline">\(\dfrac{\partial x}{\partial y}\)</span> is the Jacobian matrix.</p>
+<p><strong>The Box-Muller example</strong>: Let U ~ Unif(0, <span class="math inline">\(2\pi\)</span>), and let T ~ Exp(1) be independent of U. Define X = <span class="math inline">\(\sqrt{2T}cosU\)</span> and Y = <span class="math inline">\(\sqrt{2T}sinU\)</span>. Find the joint PDF of (X, Y ). Are they independent? What are their marginal distributions? <span class="math display">\[
+\begin{align}
+f_{X,Y}(x, y) &amp;= f_{T,U}(t,u)
+\left|
+\begin{array}{cc}
+\frac{\partial t}{\partial x} &amp; \frac{\partial t}{\partial y} \\
+\frac{\partial u}{\partial x} &amp; \frac{\partial u}{\partial y} 
+\end{array}
+\right|\\
+&amp;= 1 \cdot e^{-t} \frac{1}{2\pi} \cdot 1 \\
+&amp;= \frac{e^{\frac{x^2 + y^2}{-2}}}{2\pi} \\
+&amp;= \frac{1}{\sqrt{2\pi}}e^{\frac{x^2}{-2}} \cdot \frac{1}{\sqrt{2\pi}}e^{\frac{y^2}{-2}}
+\end{align}
+\]</span></p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/10/明天太阳照常升起的概率/" rel="next" title="明天太阳照常升起的概率">
+                <i class="fa fa-chevron-left"></i> 明天太阳照常升起的概率
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -288,6 +433,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -518,6 +667,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
