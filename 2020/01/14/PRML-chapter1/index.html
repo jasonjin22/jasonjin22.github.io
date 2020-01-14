@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="This is my CV.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="About me">
-<meta property="og:url" content="http://yoursite.com/about/index.html">
+<meta name="description" content="式1.57, 1.58 用MLE计算Gaussian分布的sample mean和sample variance。 首先log likelihood可以化简为： \[ \begin{align} \mathcal{L} = \ln P(x|\mu, \sigma^2) &amp;amp;= \sum\limits_{i=1}^{N}\ln \mathcal{N}(x|\mu, \sigma^2) \\ &amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PRML chapter1">
+<meta property="og:url" content="http://yoursite.com/2020/01/14/PRML-chapter1/index.html">
 <meta property="og:site_name" content="orres&#39; notes">
-<meta property="og:description" content="This is my CV.">
+<meta property="og:description" content="式1.57, 1.58 用MLE计算Gaussian分布的sample mean和sample variance。 首先log likelihood可以化简为： \[ \begin{align} \mathcal{L} = \ln P(x|\mu, \sigma^2) &amp;amp;= \sum\limits_{i=1}^{N}\ln \mathcal{N}(x|\mu, \sigma^2) \\ &amp;">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-09-29T16:54:44.662Z">
+<meta property="og:updated_time" content="2020-01-14T13:44:36.878Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="About me">
-<meta name="twitter:description" content="This is my CV.">
+<meta name="twitter:title" content="PRML chapter1">
+<meta name="twitter:description" content="式1.57, 1.58 用MLE计算Gaussian分布的sample mean和sample variance。 首先log likelihood可以化简为： \[ \begin{align} \mathcal{L} = \ln P(x|\mu, \sigma^2) &amp;amp;= \sum\limits_{i=1}^{N}\ln \mathcal{N}(x|\mu, \sigma^2) \\ &amp;">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/about/">
+  <link rel="canonical" href="http://yoursite.com/2020/01/14/PRML-chapter1/">
 
 
 
 
 
-  <title>About me | orres' notes</title>
+  <title>PRML chapter1 | orres' notes</title>
   
 
 
@@ -240,41 +240,230 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/14/PRML-chapter1/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jiachun Jin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="orres' notes">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">About me</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <p>This is my CV. 
-
-	<div class="row">
-    <embed src="./jiachun_jin_resume.pdf" width="100%" height="550" type="application/pdf">
-	</div>
-
-
-</p>
-
+          <h1 class="post-title" itemprop="name headline">PRML chapter1</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-14T20:05:32+08:00">
+                2020-01-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/PRML/" itemprop="url" rel="index">
+                    <span itemprop="name">PRML</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2020/01/14/PRML-chapter1/" class="leancloud_visitors" data-flag-title="PRML chapter1">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h4 id="式1.57-1.58">式1.57, 1.58</h4>
+<p>用MLE计算Gaussian分布的sample mean和sample variance。</p>
+<p>首先log likelihood可以化简为： <span class="math display">\[
+\begin{align}
+\mathcal{L} = \ln P(x|\mu, \sigma^2) &amp;= \sum\limits_{i=1}^{N}\ln \mathcal{N}(x|\mu, \sigma^2) \\
+&amp;= \sum\limits_{i=1}^{N}\ln \frac{1}{\sqrt{2\pi\sigma^2}} + \ln \exp(\frac{(x_i-\mu)^2}{-2\sigma^2}) \\
+&amp;= \sum\limits_{i=1}^{N} \frac{(x_i - \mu)^2}{-2\sigma^2} - \frac{N}{2} \ln2\pi - \frac{N}{2}\ln\sigma^2
+\end{align}\
+\]</span> 先对<span class="math inline">\(\mu\)</span>求偏导, 可以求得<span class="math inline">\(\mu_{MLE}\)</span>： <span class="math display">\[
+\begin{align}
+\frac{\partial \mathcal{L}}{\partial \mu} &amp;= \sum\limits_{i=1}^{N}\frac{x_i - \mu}{\sigma^2} = 0 \\
+&amp;\Leftrightarrow N\mu_{MLE} = \sum\limits_{i=1}^{N}x_i \\
+&amp;\Leftrightarrow \mu_{MLE} = \frac{1}{N}\sum\limits_{i=1}^{N}x_i
+\end{align}
+\]</span> 同时我们可以验证我们的sample mean和数据源自的Gaussian分布的真正均值<span class="math inline">\(\mu\)</span>是相等的： <span class="math display">\[
+\begin{align}
+\mathbb{E}[\mu_{MLE}] &amp;= \frac{1}{N}\mathbb{E}[\sum\limits_{i=1}^{N}x_i] = \mu
+\end{align}
+\]</span> 再来算 <span class="math inline">\(\sigma^2_{MLE}\)</span>: <span class="math display">\[
+\begin{align}
+\frac{\partial \mathcal{L}}{\partial \sigma^2} &amp;= \sum\limits_{i=1}^{N}\frac{\partial\frac{(x_i-\mu)^2}{-2\sigma^2}}{\partial\sigma^2} - \frac{\partial\frac{N}{2}\ln \sigma^2}{\partial\sigma^2} \\
+&amp;= \frac{\sum\limits_{i=1}^{N}(x_i-\mu)^2}{2} \frac{1}{\sigma^4} - \frac{N}{2\sigma^2} 
+= 0 \\
+\end{align}
+\]</span> 左右同乘 <span class="math inline">\(2\sigma^4\)</span>, 代入 <span class="math inline">\(\mu_{MLE}\)</span> 整理可以得出： <span class="math display">\[
+\sigma^2_{MLE} = \frac{1}{N}\sum\limits_{i=1}^{N}(x_i - \mu_{MLE})^2
+\]</span> 需要注意的是通过极大似然估计出来的 <span class="math inline">\(\sigma^2_{MLE}\)</span> 会低估实际分布的方差，所以是一个有偏估计(过拟合问题也与此相关)： <span class="math display">\[
+\begin{align}
+\mathbb{E}[\sigma^2_{MLE}] &amp;= \mathbb{E}[\frac{1}{N}\sum\limits_{i=1}^{N}(x_i - \mu_{MLE})^2] \\
+&amp;= \frac{1}{N}\sum\limits_{i=1}^{N}\mathbb{E}[(x_i^2 + \mu_{MLE}^2 - 2x_i\mu_{MLE})] \\
+&amp;= \frac{1}{N}\sum\limits_{i=1}^{N}(\mathbb{E[x_i^2]} + \mathbb{E}[\mu_{MLE}^2] - 2\mu_{MLE}\mathbb{E}[x_i]) \\
+&amp;= \frac{1}{N}\sum\limits_{i=1}^{N}(\mathbb{E[x_i^2]} - \mathbb{E}[\mu_{MLE}^2])  \\
+&amp;= \mathbb{E}[\frac{1}{N}\sum\limits_{i=1}^{N}(x_i^2 - \mu^2)] - \mathbb{E}[\mu_{MLE}^2 - \mu^2] \\
+&amp;= \frac{1}{N}\sum\limits_{i=1}^{N} \mathrm{Var}(x_i) - [\mathbb{E}[\mu_{MLE}^2] - \mathbb{E}[\mu^2]] \\
+&amp;= \frac{1}{N}\sum\limits_{i=1}^{N} \mathrm{Var}(x_i) - \mathrm{Var}(\mu_{MLE}) \\
+&amp;= \sigma^2 - \mathrm{Var}(\frac{1}{N}\sum\limits_{i=1}^{N}x_i) \\
+&amp;= \frac{N-1}{N}\sigma^2
+\end{align}
+\]</span></p>
+<hr>
+<h4 id="式1.67">式1.67</h4>
+<p>从MAP角度来看curve fitting problem。</p>
+<p>我们先假定曲线的权重 <span class="math inline">\(w\)</span> 符合Gaussian分布的先验: <span class="math display">\[
+P(w|\alpha) = \mathcal{N}(w|0, \alpha^{-1}I) = (\frac{\alpha}{2\pi})^{(M+1)/2}\exp (-\frac{\alpha}{2}w^Tw)
+\]</span> 则我们知道后验概率正比于似然函数与先验分布的乘积： <span class="math display">\[
+P(w|x,t,\alpha,\beta) \propto P(t|x,\alpha,\beta)P(w|\alpha)
+\]</span> 于是最大化后验概率就变成了最大化 <span class="math inline">\(P(t|x,\alpha,\beta)P(w|\alpha)\)</span>： <span class="math display">\[
+\begin{align}
+\ln P(t|x,\alpha,\beta)P(w|\alpha) &amp;= \ln P(t|x,\alpha,\beta) + \ln P(w|\alpha) \\
+\end{align}
+\]</span> 我们分开看这两项： <span class="math display">\[
+\ln P(t|x,\alpha,\beta) = -\frac{\beta}{2}\sum\limits_{n=1}^{N}\{y(x_n, w) - t_n\}^2 + \frac{N}{2}\ln \beta - \frac{N}{2} \ln (2\pi)
+\]</span></p>
+<p><span class="math display">\[
+\begin{align}
+\ln P(w|\alpha) &amp;= \ln (\frac{\alpha}{2\pi})^{(M+1)/2} + (-\frac{\alpha}{2}w^Tw)\\
+&amp;= -\frac{\alpha}{2}w^Tw + \frac{M+1}{2}\ln (\frac{\alpha}{2\pi})
+\end{align}
+\]</span></p>
+<p>最大化 <span class="math inline">\(\ln P(t|x,\alpha,\beta) + \ln P(w|\alpha)\)</span> 相当于最大化 <span class="math inline">\(-\frac{\alpha}{2}w^Tw - \frac{\beta}{2}\sum\limits_{n=1}^{N}\{y(x_n, w) - t_n\}^2\)</span>, 也就是最小化 <span class="math inline">\(\frac{\alpha}{2}w^Tw + \frac{\beta}{2}\sum\limits_{n=1}^{N}\{y(x_n, w) - t_n\}^2\)</span> (前一项是正则项，后一项是error function), 也就是说当权重的先验是Gaussian分布的时候MAP和岭回归(Ridge Regression)等价。</p>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/13/transformation-of-random-variables/" rel="next" title="transformation of random variables">
+                <i class="fa fa-chevron-left"></i> transformation of random variables
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -307,8 +496,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -377,6 +575,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#式1.57-1.58"><span class="nav-number">1.</span> <span class="nav-text">式1.57, 1.58</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#式1.67"><span class="nav-number">2.</span> <span class="nav-text">式1.67</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
