@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="orres&#39; notes">
 <meta property="og:description" content="The goal is to find the distribution of the transformed random variable or joint distribution of the random vector. Theorem 8.1.1 (Change of variables in one dimension). Let X be a continuous r.v. wit">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-01-13T07:12:17.740Z">
+<meta property="og:updated_time" content="2020-01-13T07:13:58.389Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="transformation of random variables">
 <meta name="twitter:description" content="The goal is to find the distribution of the transformed random variable or joint distribution of the random vector. Theorem 8.1.1 (Change of variables in one dimension). Let X be a continuous r.v. wit">
@@ -353,7 +353,8 @@ F_Y(y) &amp;= P(Y ≤ y)\\
 &amp;= F_X(g^{-1}(y)) \\
 &amp;= F_X(x) &amp;&amp; (y = g(x)) \\
 \end{align}
-\]</span> So we can have $ f_Y(y) =  =  =  = f_X(x)|  |$</p>
+\]</span></p>
+<p>So we can have <span class="math inline">\(f_Y(y) = \dfrac{dF_Y(y)}{dy} = \dfrac{dF_X(x)}{dy} = \dfrac{dF_X(x)}{dx}\dfrac{dx}{dy} = f_X(x)\left| \dfrac{dx}{dy} \right|\)</span></p>
 <p><strong>Theorem 8.1.5</strong> (Change of variables). Let X = (X1, . . . ,Xn) be a continuous random vector with joint PDF X, and let Y = g(X) where g is an invertible function from <span class="math inline">\(R^n\)</span> to <span class="math inline">\(R^n\)</span>. (The domain of g does not actually have to be all of <span class="math inline">\(R^n,\)</span> but it does need to be large enough to contain the support of X, else g(X) could be undefined!) <span class="math display">\[
 \begin{align}
 f_Y(y) = f_X(x)\left|\dfrac{\partial x}{\partial y}\right|
