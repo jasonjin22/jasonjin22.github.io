@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="结合PRML和shuhuai008大哥的讲解重新理解拉普拉斯太阳照常升起的问题 问题：太阳已经照常升起N天了，明天太阳照常升起的概率是多少？ $X: $ 事件that太阳已经照常升起了N天 $Y: $ 事件that太阳明天会照常升起 \(\theta :\) 对于任意一天而言，太阳照常升起的概率，在区间\([0, 1]\)上， \(P(\theta) = 1\)(均匀分布的概率密度函数) step">
+<meta name="description" content="结合PRML和shuhuai008大哥的讲解重新理解拉普拉斯太阳照常升起的问题 问题：太阳已经照常升起N天了，明天太阳照常升起的概率是多少？ $X: $ 事件that太阳已经照常升起了N天 $Y: $ 事件that太阳明天会照常升起 \(\theta :\) 对于任意一天而言，太阳照常升起的概率，在区间\([0, 1]\)上， \(P(\theta) = 1\)(均匀分布的概率密度函数) 一个粗浅">
 <meta property="og:type" content="article">
 <meta property="og:title" content="明天太阳照常升起的概率">
 <meta property="og:url" content="http://yoursite.com/2020/01/10/明天太阳照常升起的概率/index.html">
 <meta property="og:site_name" content="orres&#39; notes">
-<meta property="og:description" content="结合PRML和shuhuai008大哥的讲解重新理解拉普拉斯太阳照常升起的问题 问题：太阳已经照常升起N天了，明天太阳照常升起的概率是多少？ $X: $ 事件that太阳已经照常升起了N天 $Y: $ 事件that太阳明天会照常升起 \(\theta :\) 对于任意一天而言，太阳照常升起的概率，在区间\([0, 1]\)上， \(P(\theta) = 1\)(均匀分布的概率密度函数) step">
+<meta property="og:description" content="结合PRML和shuhuai008大哥的讲解重新理解拉普拉斯太阳照常升起的问题 问题：太阳已经照常升起N天了，明天太阳照常升起的概率是多少？ $X: $ 事件that太阳已经照常升起了N天 $Y: $ 事件that太阳明天会照常升起 \(\theta :\) 对于任意一天而言，太阳照常升起的概率，在区间\([0, 1]\)上， \(P(\theta) = 1\)(均匀分布的概率密度函数) 一个粗浅">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-01-10T11:03:05.023Z">
+<meta property="og:updated_time" content="2020-01-15T06:21:25.492Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="明天太阳照常升起的概率">
-<meta name="twitter:description" content="结合PRML和shuhuai008大哥的讲解重新理解拉普拉斯太阳照常升起的问题 问题：太阳已经照常升起N天了，明天太阳照常升起的概率是多少？ $X: $ 事件that太阳已经照常升起了N天 $Y: $ 事件that太阳明天会照常升起 \(\theta :\) 对于任意一天而言，太阳照常升起的概率，在区间\([0, 1]\)上， \(P(\theta) = 1\)(均匀分布的概率密度函数) step">
+<meta name="twitter:description" content="结合PRML和shuhuai008大哥的讲解重新理解拉普拉斯太阳照常升起的问题 问题：太阳已经照常升起N天了，明天太阳照常升起的概率是多少？ $X: $ 事件that太阳已经照常升起了N天 $Y: $ 事件that太阳明天会照常升起 \(\theta :\) 对于任意一天而言，太阳照常升起的概率，在区间\([0, 1]\)上， \(P(\theta) = 1\)(均匀分布的概率密度函数) 一个粗浅">
 
 
 
@@ -357,6 +357,7 @@
 <p>$X: $ 事件that太阳已经照常升起了N天</p>
 <p>$Y: $ 事件that太阳明天会照常升起</p>
 <p><span class="math inline">\(\theta :\)</span> 对于任意一天而言，太阳照常升起的概率，在区间<span class="math inline">\([0, 1]\)</span>上， <span class="math inline">\(P(\theta) = 1\)</span>(均匀分布的概率密度函数)</p>
+<h4 id="一个粗浅的视角">一个粗浅的视角</h4>
 <p><strong>step 1: 贝叶斯估计 </strong> <span class="math display">\[
 \begin{align}
 P(\theta|X) &amp;= \dfrac{P(X|\theta)P(\theta)}{\int_0^1 P(X|\theta)P(\theta)d\theta} \\ &amp;= \dfrac{P(X|\theta)}{\int_0^1 P(X|\theta)d\theta} \\ &amp;= \dfrac{\theta^N}{\int_0^1 \theta^N d\theta} \\ &amp;= \dfrac{\theta^N}{\frac{1}{N+1}\theta^{N+1}|_0^1} \\ &amp;= \dfrac{\theta^N}{\frac{1}{N+1}} \\ &amp;= (N+1)\theta^N
@@ -365,6 +366,16 @@ P(\theta|X) &amp;= \dfrac{P(X|\theta)P(\theta)}{\int_0^1 P(X|\theta)P(\theta)d\t
 \begin{align}
 P(Y|X) &amp;= \int_0^1 P(Y|X,\theta) d\theta \\ &amp;= \int_0^1 P(Y|\theta) P(\theta|X) d\theta \\ &amp;= \int_0^1 \theta (N+1)\theta^N d\theta \\ &amp;= (N+1)\int_0^1 \theta^{N+1} d\theta \\ &amp;= \dfrac{N+1}{N+2}
 \end{align}
+\]</span></p>
+<hr>
+<h4 id="一个没那么粗浅的视角">一个没那么粗浅的视角</h4>
+<p>我们一样给 <span class="math inline">\(\theta\)</span> 一个先验Beta(a, b)，使用Beta分布作为参数的先验的好处在于Beta分布是二项的一个共轭先验，我们可以得到： <span class="math display">\[
+P(\theta|m ,l, a, b) = \frac{\Gamma(m+a+l+b)}{\Gamma(m+a)\Gamma(l+b)} \theta^{m+a-1}(1-\theta)^{l+b-1}
+\]</span> 我们想要的明天太阳照常升起的概率为： <span class="math display">\[
+P(x=1|X) = \int_{0}^{1}P(x=1|\theta)P(\theta|X)d\theta = \int_{0}^1\theta P(\theta|X)d\theta = \mathbb{E}_\theta[\theta|X]
+\]</span> 由于共轭性质， <span class="math inline">\(\theta|X\)</span>也是一个Beta分布，其均值为 <span class="math inline">\(\dfrac{m+a}{m+a+l+b}\)</span>。</p>
+<p>在我们的问题中，<span class="math inline">\(m = N\)</span> , <span class="math inline">\(l = 0\)</span>， 同时对于 <span class="math inline">\(\theta\)</span>的先验是一个[0, 1]上的均匀分布，所以 <span class="math inline">\(a = b = 1\)</span>，于是最终的结果为： <span class="math display">\[
+P(x=1|X) = \dfrac{N+1}{N+2}
 \]</span></p>
 
       
@@ -454,8 +465,17 @@ P(Y|X) &amp;= \int_0^1 P(Y|X,\theta) d\theta \\ &amp;= \int_0^1 P(Y|\theta) P(\t
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -524,6 +544,22 @@ P(Y|X) &amp;= \int_0^1 P(Y|X,\theta) d\theta \\ &amp;= \int_0^1 P(Y|\theta) P(\t
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一个粗浅的视角"><span class="nav-number">1.</span> <span class="nav-text">一个粗浅的视角</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一个没那么粗浅的视角"><span class="nav-number">2.</span> <span class="nav-text">一个没那么粗浅的视角</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
