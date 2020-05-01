@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="式1.57, 1.58 用MLE计算Gaussian分布的sample mean和sample variance。 首先log likelihood可以化简为： \[ \begin{align} \mathcal{L} = \ln P(x|\mu, \sigma^2) &amp;amp;= \sum\limits_{i=1}^{N}\ln \mathcal{N}(x|\mu, \sigma^2) \\ &amp;">
+<meta name="description" content="&amp;#x5F0F;1.57, 1.58 &amp;#x7528;MLE&amp;#x8BA1;&amp;#x7B97;Gaussian&amp;#x5206;&amp;#x5E03;&amp;#x7684;sample mean&amp;#x548C;sample variance&amp;#x3002; &amp;#x9996;&amp;#x5148;log likelihood&amp;#x53EF;&amp;#x4EE5;&amp;#x5316;&amp;#x7B80;&amp;#x4E3A;&amp;#xFF1A;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PRML chapter1">
 <meta property="og:url" content="http://yoursite.com/2020/01/14/PRML-chapter1/index.html">
 <meta property="og:site_name" content="orres&#39; notes">
-<meta property="og:description" content="式1.57, 1.58 用MLE计算Gaussian分布的sample mean和sample variance。 首先log likelihood可以化简为： \[ \begin{align} \mathcal{L} = \ln P(x|\mu, \sigma^2) &amp;amp;= \sum\limits_{i=1}^{N}\ln \mathcal{N}(x|\mu, \sigma^2) \\ &amp;">
+<meta property="og:description" content="&amp;#x5F0F;1.57, 1.58 &amp;#x7528;MLE&amp;#x8BA1;&amp;#x7B97;Gaussian&amp;#x5206;&amp;#x5E03;&amp;#x7684;sample mean&amp;#x548C;sample variance&amp;#x3002; &amp;#x9996;&amp;#x5148;log likelihood&amp;#x53EF;&amp;#x4EE5;&amp;#x5316;&amp;#x7B80;&amp;#x4E3A;&amp;#xFF1A;">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-01-14T13:44:36.878Z">
+<meta property="og:updated_time" content="2020-03-12T12:20:38.518Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PRML chapter1">
-<meta name="twitter:description" content="式1.57, 1.58 用MLE计算Gaussian分布的sample mean和sample variance。 首先log likelihood可以化简为： \[ \begin{align} \mathcal{L} = \ln P(x|\mu, \sigma^2) &amp;amp;= \sum\limits_{i=1}^{N}\ln \mathcal{N}(x|\mu, \sigma^2) \\ &amp;">
+<meta name="twitter:description" content="&amp;#x5F0F;1.57, 1.58 &amp;#x7528;MLE&amp;#x8BA1;&amp;#x7B97;Gaussian&amp;#x5206;&amp;#x5E03;&amp;#x7684;sample mean&amp;#x548C;sample variance&amp;#x3002; &amp;#x9996;&amp;#x5148;log likelihood&amp;#x53EF;&amp;#x4EE5;&amp;#x5316;&amp;#x7B80;&amp;#x4E3A;&amp;#xFF1A;">
 
 
 
@@ -352,33 +352,33 @@
       
 
       
-        <h4 id="式1.57-1.58">式1.57, 1.58</h4>
-<p>用MLE计算Gaussian分布的sample mean和sample variance。</p>
-<p>首先log likelihood可以化简为： <span class="math display">\[
+        <h4 id="&#x5F0F;1.57-1.58">&#x5F0F;1.57, 1.58</h4>
+<p>&#x7528;MLE&#x8BA1;&#x7B97;Gaussian&#x5206;&#x5E03;&#x7684;sample mean&#x548C;sample variance&#x3002;</p>
+<p>&#x9996;&#x5148;log likelihood&#x53EF;&#x4EE5;&#x5316;&#x7B80;&#x4E3A;&#xFF1A; <span class="math display">\[
 \begin{align}
 \mathcal{L} = \ln P(x|\mu, \sigma^2) &amp;= \sum\limits_{i=1}^{N}\ln \mathcal{N}(x|\mu, \sigma^2) \\
 &amp;= \sum\limits_{i=1}^{N}\ln \frac{1}{\sqrt{2\pi\sigma^2}} + \ln \exp(\frac{(x_i-\mu)^2}{-2\sigma^2}) \\
 &amp;= \sum\limits_{i=1}^{N} \frac{(x_i - \mu)^2}{-2\sigma^2} - \frac{N}{2} \ln2\pi - \frac{N}{2}\ln\sigma^2
 \end{align}\
-\]</span> 先对<span class="math inline">\(\mu\)</span>求偏导, 可以求得<span class="math inline">\(\mu_{MLE}\)</span>： <span class="math display">\[
+\]</span> &#x5148;&#x5BF9;<span class="math inline">\(\mu\)</span>&#x6C42;&#x504F;&#x5BFC;, &#x53EF;&#x4EE5;&#x6C42;&#x5F97;<span class="math inline">\(\mu_{MLE}\)</span>&#xFF1A; <span class="math display">\[
 \begin{align}
 \frac{\partial \mathcal{L}}{\partial \mu} &amp;= \sum\limits_{i=1}^{N}\frac{x_i - \mu}{\sigma^2} = 0 \\
 &amp;\Leftrightarrow N\mu_{MLE} = \sum\limits_{i=1}^{N}x_i \\
 &amp;\Leftrightarrow \mu_{MLE} = \frac{1}{N}\sum\limits_{i=1}^{N}x_i
 \end{align}
-\]</span> 同时我们可以验证我们的sample mean和数据源自的Gaussian分布的真正均值<span class="math inline">\(\mu\)</span>是相等的： <span class="math display">\[
+\]</span> &#x540C;&#x65F6;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x9A8C;&#x8BC1;&#x6211;&#x4EEC;&#x7684;sample mean&#x548C;&#x6570;&#x636E;&#x6E90;&#x81EA;&#x7684;Gaussian&#x5206;&#x5E03;&#x7684;&#x771F;&#x6B63;&#x5747;&#x503C;<span class="math inline">\(\mu\)</span>&#x662F;&#x76F8;&#x7B49;&#x7684;&#xFF1A; <span class="math display">\[
 \begin{align}
 \mathbb{E}[\mu_{MLE}] &amp;= \frac{1}{N}\mathbb{E}[\sum\limits_{i=1}^{N}x_i] = \mu
 \end{align}
-\]</span> 再来算 <span class="math inline">\(\sigma^2_{MLE}\)</span>: <span class="math display">\[
+\]</span> &#x518D;&#x6765;&#x7B97; <span class="math inline">\(\sigma^2_{MLE}\)</span>: <span class="math display">\[
 \begin{align}
 \frac{\partial \mathcal{L}}{\partial \sigma^2} &amp;= \sum\limits_{i=1}^{N}\frac{\partial\frac{(x_i-\mu)^2}{-2\sigma^2}}{\partial\sigma^2} - \frac{\partial\frac{N}{2}\ln \sigma^2}{\partial\sigma^2} \\
 &amp;= \frac{\sum\limits_{i=1}^{N}(x_i-\mu)^2}{2} \frac{1}{\sigma^4} - \frac{N}{2\sigma^2} 
 = 0 \\
 \end{align}
-\]</span> 左右同乘 <span class="math inline">\(2\sigma^4\)</span>, 代入 <span class="math inline">\(\mu_{MLE}\)</span> 整理可以得出： <span class="math display">\[
+\]</span> &#x5DE6;&#x53F3;&#x540C;&#x4E58; <span class="math inline">\(2\sigma^4\)</span>, &#x4EE3;&#x5165; <span class="math inline">\(\mu_{MLE}\)</span> &#x6574;&#x7406;&#x53EF;&#x4EE5;&#x5F97;&#x51FA;&#xFF1A; <span class="math display">\[
 \sigma^2_{MLE} = \frac{1}{N}\sum\limits_{i=1}^{N}(x_i - \mu_{MLE})^2
-\]</span> 需要注意的是通过极大似然估计出来的 <span class="math inline">\(\sigma^2_{MLE}\)</span> 会低估实际分布的方差，所以是一个有偏估计(过拟合问题也与此相关)： <span class="math display">\[
+\]</span> &#x9700;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;&#x901A;&#x8FC7;&#x6781;&#x5927;&#x4F3C;&#x7136;&#x4F30;&#x8BA1;&#x51FA;&#x6765;&#x7684; <span class="math inline">\(\sigma^2_{MLE}\)</span> &#x4F1A;&#x4F4E;&#x4F30;&#x5B9E;&#x9645;&#x5206;&#x5E03;&#x7684;&#x65B9;&#x5DEE;&#xFF0C;&#x6240;&#x4EE5;&#x662F;&#x4E00;&#x4E2A;&#x6709;&#x504F;&#x4F30;&#x8BA1;(&#x8FC7;&#x62DF;&#x5408;&#x95EE;&#x9898;&#x4E5F;&#x4E0E;&#x6B64;&#x76F8;&#x5173;)&#xFF1A; <span class="math display">\[
 \begin{align}
 \mathbb{E}[\sigma^2_{MLE}] &amp;= \mathbb{E}[\frac{1}{N}\sum\limits_{i=1}^{N}(x_i - \mu_{MLE})^2] \\
 &amp;= \frac{1}{N}\sum\limits_{i=1}^{N}\mathbb{E}[(x_i^2 + \mu_{MLE}^2 - 2x_i\mu_{MLE})] \\
@@ -392,17 +392,17 @@
 \end{align}
 \]</span></p>
 <hr>
-<h4 id="式1.67">式1.67</h4>
-<p>从MAP角度来看curve fitting problem。</p>
-<p>我们先假定曲线的权重 <span class="math inline">\(w\)</span> 符合Gaussian分布的先验: <span class="math display">\[
+<h4 id="&#x5F0F;1.67">&#x5F0F;1.67</h4>
+<p>&#x4ECE;MAP&#x89D2;&#x5EA6;&#x6765;&#x770B;curve fitting problem&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x5148;&#x5047;&#x5B9A;&#x66F2;&#x7EBF;&#x7684;&#x6743;&#x91CD; <span class="math inline">\(w\)</span> &#x7B26;&#x5408;Gaussian&#x5206;&#x5E03;&#x7684;&#x5148;&#x9A8C;: <span class="math display">\[
 P(w|\alpha) = \mathcal{N}(w|0, \alpha^{-1}I) = (\frac{\alpha}{2\pi})^{(M+1)/2}\exp (-\frac{\alpha}{2}w^Tw)
-\]</span> 则我们知道后验概率正比于似然函数与先验分布的乘积： <span class="math display">\[
+\]</span> &#x5219;&#x6211;&#x4EEC;&#x77E5;&#x9053;&#x540E;&#x9A8C;&#x6982;&#x7387;&#x6B63;&#x6BD4;&#x4E8E;&#x4F3C;&#x7136;&#x51FD;&#x6570;&#x4E0E;&#x5148;&#x9A8C;&#x5206;&#x5E03;&#x7684;&#x4E58;&#x79EF;&#xFF1A; <span class="math display">\[
 P(w|x,t,\alpha,\beta) \propto P(t|x,\alpha,\beta)P(w|\alpha)
-\]</span> 于是最大化后验概率就变成了最大化 <span class="math inline">\(P(t|x,\alpha,\beta)P(w|\alpha)\)</span>： <span class="math display">\[
+\]</span> &#x4E8E;&#x662F;&#x6700;&#x5927;&#x5316;&#x540E;&#x9A8C;&#x6982;&#x7387;&#x5C31;&#x53D8;&#x6210;&#x4E86;&#x6700;&#x5927;&#x5316; <span class="math inline">\(P(t|x,\alpha,\beta)P(w|\alpha)\)</span>&#xFF1A; <span class="math display">\[
 \begin{align}
 \ln P(t|x,\alpha,\beta)P(w|\alpha) &amp;= \ln P(t|x,\alpha,\beta) + \ln P(w|\alpha) \\
 \end{align}
-\]</span> 我们分开看这两项： <span class="math display">\[
+\]</span> &#x6211;&#x4EEC;&#x5206;&#x5F00;&#x770B;&#x8FD9;&#x4E24;&#x9879;&#xFF1A; <span class="math display">\[
 \ln P(t|x,\alpha,\beta) = -\frac{\beta}{2}\sum\limits_{n=1}^{N}\{y(x_n, w) - t_n\}^2 + \frac{N}{2}\ln \beta - \frac{N}{2} \ln (2\pi)
 \]</span></p>
 <p><span class="math display">\[
@@ -411,7 +411,7 @@ P(w|x,t,\alpha,\beta) \propto P(t|x,\alpha,\beta)P(w|\alpha)
 &amp;= -\frac{\alpha}{2}w^Tw + \frac{M+1}{2}\ln (\frac{\alpha}{2\pi})
 \end{align}
 \]</span></p>
-<p>最大化 <span class="math inline">\(\ln P(t|x,\alpha,\beta) + \ln P(w|\alpha)\)</span> 相当于最大化 <span class="math inline">\(-\frac{\alpha}{2}w^Tw - \frac{\beta}{2}\sum\limits_{n=1}^{N}\{y(x_n, w) - t_n\}^2\)</span>, 也就是最小化 <span class="math inline">\(\frac{\alpha}{2}w^Tw + \frac{\beta}{2}\sum\limits_{n=1}^{N}\{y(x_n, w) - t_n\}^2\)</span> (前一项是正则项，后一项是error function), 也就是说当权重的先验是Gaussian分布的时候MAP和岭回归(Ridge Regression)等价。</p>
+<p>&#x6700;&#x5927;&#x5316; <span class="math inline">\(\ln P(t|x,\alpha,\beta) + \ln P(w|\alpha)\)</span> &#x76F8;&#x5F53;&#x4E8E;&#x6700;&#x5927;&#x5316; <span class="math inline">\(-\frac{\alpha}{2}w^Tw - \frac{\beta}{2}\sum\limits_{n=1}^{N}\{y(x_n, w) - t_n\}^2\)</span>, &#x4E5F;&#x5C31;&#x662F;&#x6700;&#x5C0F;&#x5316; <span class="math inline">\(\frac{\alpha}{2}w^Tw + \frac{\beta}{2}\sum\limits_{n=1}^{N}\{y(x_n, w) - t_n\}^2\)</span> (&#x524D;&#x4E00;&#x9879;&#x662F;&#x6B63;&#x5219;&#x9879;&#xFF0C;&#x540E;&#x4E00;&#x9879;&#x662F;error function), &#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x5F53;&#x6743;&#x91CD;&#x7684;&#x5148;&#x9A8C;&#x662F;Gaussian&#x5206;&#x5E03;&#x7684;&#x65F6;&#x5019;MAP&#x548C;&#x5CAD;&#x56DE;&#x5F52;(Ridge Regression)&#x7B49;&#x4EF7;&#x3002;</p>
 
       
     </div>
@@ -445,6 +445,10 @@ P(w|x,t,\alpha,\beta) \propto P(t|x,\alpha,\beta)P(w|\alpha)
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/16/PRML-chapter2/" rel="prev" title="PRML chapter2">
+                PRML chapter2 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -523,7 +527,7 @@ P(w|x,t,\alpha,\beta) \propto P(t|x,\alpha,\beta)P(w|\alpha)
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -559,6 +563,12 @@ P(w|x,t,\alpha,\beta) \propto P(t|x,\alpha,\beta)P(w|\alpha)
                     <a href="mailto:jinjch@shanghaitech.edu.cn" target="_blank" title="E-Mail">
                       
                         <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://jiachunjin.github.io" target="_blank" title="H">
+                      
+                        <i class="fa fa-fw fa-globe"></i>H</a>
                   </span>
                 
             </div>
